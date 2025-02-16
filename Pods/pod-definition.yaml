@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod #Pod is case sensitive
+metadata:
+  name: myapp-pod1
+  labels:
+    app: myapp
+    # type: front-end
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: ['sh', '-c', 'echo Hello Kubernetes from swami! && sleep 3600']
+  # - name: myapp-container2
+  #   image: nginx
+##############################################################################################################
+# Create the pod
+# kubectl create -f pod-definition.yaml
+# kubectl apply -f pod-definition.yaml
+# kubectl get pods
+# kubectl describe pod myapp-pod1
+# kubectl edit pod myapp-pod1
+# kubectl logs myapp-pod1
+# kubectl run redis --image=redis123 --dry-run=client -o yaml > pod-definition.yaml: Create a pod definition file for redis pod
+##############################################################################################################

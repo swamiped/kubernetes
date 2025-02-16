@@ -1,0 +1,200 @@
+containers + orchestration
+Autoscaling, Replicaset
+kuberenetes is a container orchestration tool, that used to manage , deploy 100s and 1000s of containers in a cluster environment.
+
+kuberenetes Architecture:
+    -Node: is a machine on which kuberenetes is installed.a node is a worker machine in kuberenetes that is where containers will be launched by kuberenetes.
+    -cluster: is a set of nodes grouped together. A cluster has atleast one master node and multiple worker nodes.
+    -Master: is a machine or node where kuberenetes control plane is installed. The control plane is responsible for managing the cluster.
+
+when kubernetes installed on a machine, it creates a cluster. The cluster has a master node and multiple worker nodes. The master node is responsible for managing the cluster. The worker nodes are the machines where the containers will be launched by kuberenetes.
+components: API server, etcd, kubelet, controllers, container runtime, scheduler, kube-proxy. 
+
+API server: is the front end of the kuberenetes control plane. It is responsible for providing kuberenetes API using which users can interact with kuberenetes.
+etcd: is a distributed key-value store used by kuberenetes to store all the cluster data.
+kubelet: is an agent that runs on each node in the cluster. It makes sure that the containers are running in a pod. 
+controllers: are the brain behind orchestration. They are responsible for noticing and responding when nodes, containers, or endpoints go down.
+container runtime: is the software that is responsible for running containers. kuberenetes supports several container runtimes: docker, containerd, cri-o, etc.
+scheduler: is responsible for distributing work or containers across multiple nodes. It looks for newly created pods and assigns them to nodes.
+kube-proxy: is a network proxy that runs on each node in the cluster. It maintains network rules on nodes. These network rules allow network communication to the pods from network sessions inside or outside of the cluster.
+Master Node: API server, etcd, scheduler, controller manager
+worker node: kubelet, container runtime, kube-proxy.
+
+kubectl: is a command-line tool that is used to interact with kuberenetes cluster. It is used to deploy applications, inspect and manage cluster resources, and view logs.
+kubectl get nodes: to get the list of nodes in the cluster.
+kubectl version: to get the kubectl version.
+kubectl get pods: to get the list of pods in the cluster.
+kubectl get services: to get the list of services in the cluster.
+kubectl get deployments: to get the list of deployments in the cluster.
+kubectl create -f filename.yaml: to create a resource in the cluster.
+kubectl delete -f filename.yaml: to delete a resource in the cluster.
+kubectl describe pod podname: to get the details of a pod.
+kubectl describe service servicename: to get the details of a service.
+kubectl describe deployment deploymentname: to get the details of a deployment.
+kubectl logs podname: to get the logs of a pod.
+kubectl exec -it podname -- /bin/bash: to get the shell of a pod.
+kubectl apply -f filename.yaml: to apply changes to a resource in the cluster.
+kubectl edit pod podname: to edit a pod.
+kubectl edit service servicename: to edit a service.
+kubectl edit deployment deploymentname: to edit a deployment.
+kubectl scale deployment deploymentname --replicas=3: to scale a deployment.
+kubectl expose deployment deploymentname --type=LoadBalancer --port=80: to expose a deployment.
+kubectl get events: to get the events in the cluster.
+kubectl get pods -o wide: to get the pods with more details.
+kubectl get services -o wide: to get the services with more details.
+kubectl get deployments -o wide: to get the deployments with more details.
+kubectl get nodes -o wide: to get the nodes with more details.
+kubectl get pods --all-namespaces: to get the pods in all namespaces.
+kubectl get services --all-namespaces: to get the services in all namespaces.
+kubectl get deployments --all-namespaces: to get the deployments in all namespaces.
+kubectl get nodes --all-namespaces: to get the nodes in all namespaces.
+kubectl get pods -n namespace: to get the pods in a specific namespace.
+kubectl get services -n namespace: to get the services in a specific namespace.
+kubectl get deployments -n namespace: to get the deployments in a specific namespace.
+kubectl get nodes -n namespace: to get the nodes in a specific namespace.
+kubectl get pods -l labelname=labelvalue: to get the pods with a specific label.
+kubectl get services -l labelname=labelvalue: to get the services with a specific label.
+kubectl get deployments -l labelname=labelvalue: to get the deployments with a specific label.
+kubectl get nodes -l labelname=labelvalue: to get the nodes with a specific label.
+kubectl get pods -l labelname!=labelvalue: to get the pods without a specific label.
+kubectl get services -l labelname!=labelvalue: to get the services without a specific label.
+kubectl get deployments -l labelname!=labelvalue: to get the deployments without a specific label.
+kubectl get nodes -l labelname!=labelvalue: to get the nodes without a specific label.
+kubectl get pods -l labelname in (labelvalue1,labelvalue2): to get the pods with a specific label in a list.
+kubectl get services -l labelname in (labelvalue1,labelvalue2): to get the services with a specific label in a list.
+kubectl get deployments -l labelname in (labelvalue1,labelvalue2): to get the deployments with a specific label in a list.
+kubectl get nodes -l labelname in (labelvalue1,labelvalue2): to get the nodes with a specific label in a list.
+kubectl get pods -l labelname notin (labelvalue1,labelvalue2): to get the pods without a specific label in a list.
+kubectl get services -l labelname notin (labelvalue1,labelvalue2): to get the services without a specific label in a list.
+kubectl get deployments -l labelname notin (labelvalue1,labelvalue2): to get the deployments without a specific label in a list.
+kubectl get nodes -l labelname notin (labelvalue1,labelvalue2): to get the nodes without a specific label in a list.
+kubectl get pods -l labelname: to get the pods with a specific label.
+kubectl get services -l labelname: to get the services with a specific label.
+kubectl get deployments -l labelname: to get the deployments with a specific label.
+kubectl get nodes -l labelname: to get the nodes with a specific label.
+kubectl get pods -l '!labelname': to get the pods without a specific label.
+kubectl get services -l '!labelname': to get the services without a specific label.
+kubectl get deployments -l '!labelname': to get the deployments without a specific label.
+kubectl get nodes -l '!labelname': to get the nodes without a specific label.
+kubectl get pods -l 'labelname in (labelvalue1,labelvalue2)': to get the pods with a specific label in a list.
+kubectl get services -l 'labelname in (labelvalue1,labelvalue2)': to get the services with a specific label in a list.
+kubectl get deployments -l 'labelname in (labelvalue1,labelvalue2)': to get the deployments with a specific label in a list.
+kubectl get nodes -l 'labelname in (labelvalue1,labelvalue2)': to get the nodes with a specific label in a list.    
+kubectl get pods -l 'labelname notin (labelvalue1,labelvalue2)': to get the pods without a specific label in a list.
+kubectl get services -l 'labelname notin (labelvalue1,labelvalue2)': to get the services without a specific label in a list.
+kubectl cluster-info: to get the cluster information.
+kubectl config view: to get the kubectl configuration.
+kubectl version: to get the kubectl version.
+kubectl get componentstatuses: to get the component statuses.
+```
+
+container runtime interface (CRI): is an interface between kuberenetes and container runtimes. It is used by kuberenetes to run containers on nodes. CRI is a plugin-based interface that allows kuberenetes to support multiple container runtimes
+containerd: is a container runtime that is used by kuberenetes to run containers on nodes. It is a lightweight container runtime that is designed to be simple, fast, and reliable. containerd is a core component of the kuberenetes container runtime interface (CRI).
+OCI (Open Container Initiative): is a set of open industry standards for container runtimes and images. It defines the container image format and runtime specification. OCI is supported by kuberenetes and other container runtimes.
+dockershim: is a component in kuberenetes that is used to run containers using the docker container runtime. It is a shim layer that translates kuberenetes CRI calls to docker commands. dockershim is used when kuberenetes is configured to use the docker container runtime.
+containerd: is a container runtime that is used by kuberenetes to run containers on nodes. It is a lightweight container runtime that is designed to be simple, fast, and reliable. containerd is a core component of the kuberenetes container runtime interface (CRI).
+CRI-O: is a lightweight container runtime that is used by kuberenetes to run containers on nodes. It is an implementation of the kuberenetes container runtime interface (CRI) that is designed to be simple, fast, and secure. CRI-O is an alternative to docker and containerd.
+nerdctl: is a command-line tool that is used to interact with containerd. It is a drop-in replacement for docker that is designed to work with containerd. nerdctl provides a docker-like experience for working with containers and images using containerd.
+crictl: is a command-line tool that is used to interact with kuberenetes container runtimes. It is a client for the kuberenetes container runtime interface (CRI) that allows users to manage containers and images on nodes. crictl is used to inspect, create, delete, and manage containers and images.
+cri-tools: is a set of tools that are used to interact with kuberenetes container runtimes. It includes crictl, ctr, and other tools that are used to manage containers and images on nodes. cri-tools is a collection of command-line tools that are used to work with kuberenetes container runtimes.
+
+
+Setup kubernetes:
+for development, testing, and learning kuberenetes, we can use the following tools:
+ 1. minikube: is a tool that is used to run kuberenetes locally. It creates a single-node kuberenetes cluster on a virtual machine using a hypervisor like VirtualBox or KVM. minikube is used for development, testing, and learning kuberenetes.
+ 2. kind: is a tool that is used to run kuberenetes clusters using Docker containers as nodes. It creates a multi-node kuberenetes cluster on a local machine using Docker containers. kind is used for development, testing, and learning kuberenetes.
+ 3. kubeadm: is a tool that is used to bootstrap kuberenetes clusters. It creates a multi-node kuberenetes cluster on virtual or physical machines. kubeadm is used for production deployments of kuberenetes.
+
+for production deployments of kuberenetes, we can use the following tools:
+ gke: is a managed kuberenetes service provided by Google Cloud Platform. It creates and manages kuberenetes clusters on Google Cloud Platform. gke is used for production deployments of kuberenetes.
+ eks: is a managed kuberenetes service provided by Amazon Web Services. It creates and manages kuberenetes clusters on Amazon Web Services. eks is used for production deployments of kuberenetes.
+ aks: is a managed kuberenetes service provided by Microsoft Azure. It creates and manages kuberenetes clusters on Microsoft Azure. aks is used for production deployments of kuberenetes.
+
+
+ kuberenetes objects:
+    1. Pod: is the smallest unit of kuberenetes that represents a single instance of a container. It is a group of one or more containers that are deployed together on a node. Pods are the building blocks of kuberenetes applications.  
+    2. Service: is an abstraction that defines a set of pods and a policy for accessing them. It provides a stable endpoint for accessing the pods. Services are used to expose applications running in pods to other applications or users.
+    3. Deployment: is a kuberenetes object that manages a set of identical pods. It provides declarative updates to pods and replica sets. Deployments are used to create and manage replicas of pods in a cluster.
+    4. ReplicaSet: is a kuberenetes object that manages a set of identical pods. It ensures that a specified number of pod replicas are running at all times. ReplicaSets are used to maintain the desired number of pods in a cluster.
+    5. StatefulSet: is a kuberenetes object that manages a set of stateful pods. It provides stable, unique network identifiers and persistent storage for each pod. StatefulSets are used to manage stateful applications in a cluster.
+    6. DaemonSet: is a kuberenetes object that manages a set of pods that run on every node in a cluster. It ensures that a specified number of pod replicas are running on each node. DaemonSets are used to run system daemons on nodes.
+    7. Job: is a kuberenetes object that manages a set of pods that run to completion. It creates one or more pods and ensures that a specified number of them successfully terminate. Jobs are used to run batch or cron jobs in a cluster.
+    8. CronJob: is a kuberenetes object that manages a set of pods that run on a schedule. It creates one or more pods and ensures that a specified number of them run at a specified time. CronJobs are used to run periodic tasks in a cluster.
+    9. Namespace: is a kuberenetes object that provides a scope for names. It is used to organize and partition resources in a cluster. Namespaces are used to group related resources together in a cluster.
+    10. ConfigMap: is a kuberenetes object that stores configuration data in key-value pairs. It provides a way to decouple configuration data from pods. ConfigMaps are used to store configuration data that can be consumed by pods.
+    11. Secret: is a kuberenetes object that stores sensitive data in key-value pairs. It provides a way to store and manage sensitive information securely. Secrets are used to store sensitive data like passwords, tokens, and keys.
+    12. PersistentVolume: is a kuberenetes object that represents a piece of storage in the cluster. It provides a way to decouple storage from pods. PersistentVolumes are used to store data that persists beyond the lifetime of a pod.
+    13. PersistentVolumeClaim: is a kuberenetes object that requests storage from a PersistentVolume. It provides a way to dynamically provision storage for pods. PersistentVolumeClaims are used to request storage for pods.
+    14. ServiceAccount: is a kuberenetes object that provides an identity for pods. It provides a way to authenticate and authorize pods. ServiceAccounts are used to grant permissions to pods.
+    15. Role: is a kuberenetes object that provides permissions to access resources in a namespace. It provides a way to define fine-grained access control for pods. Roles are used to grant permissions to pods.
+    16. RoleBinding: is a kuberenetes object that binds a Role to a ServiceAccount. It provides a way to grant permissions to pods. RoleBindings are used to grant permissions to pods.
+    17. ClusterRole: is a kuberenetes object that provides permissions to access resources in a cluster. It provides a way to define fine-grained access control for pods. ClusterRoles are used to grant permissions to pods.
+    18. ClusterRoleBinding: is a kuberenetes object that binds a ClusterRole to a ServiceAccount. It provides a way to grant permissions to pods. ClusterRoleBindings are used to grant permissions to pods.
+    19. NetworkPolicy: is a kuberenetes object that provides network isolation for pods. It provides a way to define rules for network traffic. NetworkPolicies are used to control network traffic to and from pods.
+    20. Ingress: is a kuberenetes object that provides external access to services in a cluster. It provides a way to expose services to external users. Ingresses are used to route traffic to services in a cluster.
+    21. multi-container pod: is a pod that contains more than one container. It is a group of containers that are deployed together on a node. Multi-container pods are used to run multiple containers that work together in a pod.
+
+```
+```
+minikube: is a tool that is used to run kuberenetes locally. It creates a single-node kuberenetes cluster on a virtual machine using a hypervisor like VirtualBox or KVM. minikube is used for development, testing, and learning kuberenetes.
+minikube is a bundle of kuberenetes components that are required to run a kuberenetes cluster. It includes the kuberenetes API server, etcd, kubelet, and other components that are needed to run a kuberenetes cluster.
+minikube start: to start minikube.
+minikube stop: to stop minikube.
+minikube delete: to delete minikube.
+
+minikube installation:
+ install minikube on windows:
+    pre-requisites:
+        1. a hypervisor like VirtualBox or KVM installed.
+        2. a virtualization technology like Intel VT-x or AMD-V enabled in the BIOS. in windows settings, go to update and security -> recovery -> advanced startup -> restart now -> troubleshoot -> advanced options -> UEFI firmware settings -> restart -> enable virtualization technology.
+            to check if virtualization technology is enabled, open a command prompt and run the following command:
+            systeminfo | findstr /C:"Hyper-V" /C:"Virtualization" or tasklist /vm
+            to enable virtualization technology in the BIOS, restart the computer and press the BIOS key (F2, F10, F12, DEL, ESC) to enter the BIOS settings. look for virtualization technology or VT-x or AMD-V and enable it.
+        3. a 64-bit operating system, with at least 2 CPU cores and 2GB of RAM.
+   
+    download minikube from the official website: https://minikube.sigs.k8s.io/docs/start/
+        1. extract the downloaded file to a directory.
+        2. add the minikube directory to the system PATH.
+        3. open a command prompt and run the following command to verify the installation:
+        minikube version 
+        4. "minikube config set driver virtualbox": to set the virtualbox driver for minikube.
+        5. "minikube start --driver=virtualbox": to start minikube with the virtualbox driver.
+        6. minikube start: to start minikube.
+        7. minikube stop: to stop minikube.
+        8. minikube delete: to delete minikube.
+        9. minikube status: to get the status of minikube.
+        10. minikube dashboard: to open the kuberenetes dashboard.
+```
+Sample application:
+    kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
+    kubectl expose deployment hello-minikube --type=NodePort --port=8080
+    kubectl port-forward service/hello-minikube 8080:8080
+    kubectl get services
+
+
+```
+```
+basic commands:
+kubectl get nodes: to get the list of nodes in the cluster.
+kubectl run nginx --image nginx:1.21.1: to run a pod with the nginx image pulled from Docker Hub.
+kubectl get pods: to get the list of pods in the cluster.
+kubectl get pods -o wide: to get the pods with more details.
+kubectl delete pod nginx: to delete a pod.
+
+```
+
+Controllers: controllers are the brain behind  kubernetes they are process that monitor objects and responds accordingly.
+Replication controller: helps us run multiple instance of a single pod in the cluster thus providing high availability. ensures specified no of pods running.
+    kubectl create -f rc-definition.yaml
+    kubectl get replicationcontroller
+Replicaset: it is similar to replication controller.
+    kubectl replace -f rs-definition.yaml: Replace the existing replica set with the new replica set definition
+    kubectl scale --replicas=6 -f rs-definition.yaml: Scale the replica set to 6 replicas but the replica set definition file should have replicas set to 2
+
+kubectl api-resources: List all the resources in the Kubernetes cluster
+kubectl api-resources | grep replicaset: Get the short names of the resources
+kubectl explain replicaset | grep VERSION: #Get the apiVersion for replicaset
+kubectl apply -h
+kubectl scale --replicas=5 new-replica-set
+
+
