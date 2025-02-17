@@ -197,4 +197,61 @@ kubectl explain replicaset | grep VERSION: #Get the apiVersion for replicaset
 kubectl apply -h
 kubectl scale --replicas=5 new-replica-set
 
+Deployments:
+    is used to create a deployment in kubernetes, is a higher level concept that manages replica sets and provides declarative updates to pods along with a lot of other useful features.
 
+    kubectl get all
+    kubectl create -f frontend-deployment-definition.yaml --record=true 
+    kubectl create deployment --help
+    kubectl create deployment httpd-frontend --image=httpd:2.4-alpine --replicas=3
+
+    Deployment rollout commands:
+        kubectl rollout status deployment/nginx-deployment
+        kubectl rollout history deployment/nginx-deployment #Check the rollout history of the deployment
+        kubectl rollout undo deployment/nginx-deployment --to-revision=1 #Rollback to a specific revision
+        
+kubectl set image pod/myapp-pod1 myapp-container= : Update the image of the container in the pod
+
+
+Networking in kuberenetes:
+    - ip address is assigned to pod not container
+cluster Networking:
+    Each pod gets its own IP address. This IP address is unique within the cluster and cannot be changed. Pods within a node can communicate with each other using localhost. For pods to communicate with each other across nodes, they use the pod IP address.
+    Pods that are running on a node can communicate with all other pods on the same node without NAT.
+    All pods can communicate with all other pods without NAT, provided they know the other pod's IP address.
+Pods are assigned a single IP address. This IP address is used for all containers within the pod. Containers within a pod share their network namespace.
+Pods can also communicate with each other using services. Services are an abstract way to expose an application running on a set of pods as a network service.
+Services in kubernetes: Services in kubernetes is a vast topic and we will cover it in detail in the services section. But for now, let's understand how services work.
+A service in kubernetes is an abstraction that defines a logical set of pods and a policy by which to access them.
+Services enable a loose coupling between dependent pods. This enables pods to scale up or down and to be replaced without affecting the overall application.
+Services in kubernetes can be exposed in different ways by specifying a type in the service definition. The different types of services are:
+ClusterIP: Exposes the service on a cluster-internal IP. Choosing this value makes the service only reachable from within the cluster.
+NodePort: Exposes the service on each node's IP at a static port (NodePort). A ClusterIP service, to which the NodePort service will route, is automatically created. nodeport range is 30000-32767.
+LoadBalancer: Exposes the service externally using a cloud provider's load balancer. NodePort and ClusterIP services, to which the external load balancer will route, are automatically created.
+ExternalName: Maps the service to the contents of the externalName field (e.g. foo.bar.example.com), by returning a CNAME record with its value. No proxying of any kind is set up.
+Services in kubernetes can be discovered via environment variables or DNS.
+Services in kubernetes can be used to load balance traffic across a set of pods.
+Services in kubernetes can be used to expose an application running on a set of pods as a network service.
+Services in kubernetes can be used to expose an application running on a set of pods to the outside world.
+Services in kubernetes can be used to expose an application running on a set of pods to internal applications, external applications, internal users, external users.
+
+
+
+
+
+
+Install and set up the kubectl tool: https://kubernetes.io/docs/tasks/tools/
+
+Install Minikube: https://minikube.sigs.k8s.io/docs/start/
+
+Install VirtualBox: https://www.virtualbox.org/wiki/Downloads
+
+https://www.virtualbox.org/wiki/Linux_Downloads
+
+Minikube Tutorial: https://kubernetes.io/docs/tutorials/hello-minikube/
+
+If the minikube installation has been done on the macOS, then to access the URL on the local browser, we need to do a few steps to get the service URL to work. Those steps are covered on this documentation page: https://minikube.sigs.k8s.io/docs/handbook/accessing/#using-minikube-service-with-tunnel
+
+
+RBAC (Role Based Access Control)
+CRD (Custom Resource Definition)
