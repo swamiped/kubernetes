@@ -164,6 +164,7 @@ minikube installation:
         8. minikube delete: to delete minikube.
         9. minikube status: to get the status of minikube.
         10. minikube dashboard: to open the kuberenetes dashboard.
+        11. minikube ssh
 ```
 Sample application:
     kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
